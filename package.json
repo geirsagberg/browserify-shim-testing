@@ -1,0 +1,40 @@
+{
+  "name": "browserify-shim-testing",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.7.11",
+    "browserify": "^10.2.4",
+    "browserify-shim": "^3.8.8",
+    "deamdify": "^0.1.1",
+    "exorcist": "^0.4.0",
+    "jquery": "^2.1.4",
+    "jquery-validation-dist": "^1.13.2-pre",
+    "minifyify": "^7.0.1"
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js",
+    "jquery-validation": "./node_modules/jquery-validation-dist/dist/jquery.validate.js"
+  },
+  "scripts": {
+    "browser-sync": "browser-sync start --server --files '*.html, *.js'",
+    "bundle": "browserify a.js -d -p [minifyify --map app.map.json --output app.map.json] > app.js"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "jQuery",
+    "jquery-validation": {
+      "depends": [
+        "jquery"
+      ]
+    }
+  }
+}
